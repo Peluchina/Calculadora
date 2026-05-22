@@ -19,7 +19,7 @@ namespace Calculadora.Controllers
         [HttpPost]
         public async Task<IActionResult> Insertar([FromBody] OperacionInsertarRequest oOp)
         {
-            IOperacionService _operacionService = serviceFactory.CreateService(oOp);
+            IOperacionService _operacionService = serviceFactory.CreateService();
             bool respuesta = await _operacionService.Insertar(oOp);
 
             return StatusCode(StatusCodes.Status200OK, new { isSuccess = respuesta, resultadoCalculado = oOp.Resultado });
@@ -29,7 +29,7 @@ namespace Calculadora.Controllers
         [HttpPost("InsertarOpC")]
         public async Task<IActionResult> InsertarOpC([FromBody] OperacionInsertarRequest oOp)
         {
-            IOperacionService _operacionService = serviceFactory.CreateOperacionCorrectaService(oOp);
+            IOperacionService _operacionService = serviceFactory.CreateOperacionCorrectaService();
             bool respuesta = await _operacionService.Insertar(oOp);
 
             return StatusCode(StatusCodes.Status200OK, new { isSuccess = respuesta, resultadoCalculado = oOp.Resultado });

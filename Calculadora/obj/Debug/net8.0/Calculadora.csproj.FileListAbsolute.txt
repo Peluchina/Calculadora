@@ -78,3 +78,4 @@ C:\Users\eliss\source\repos\Calculadora\Calculadora\obj\Debug\net8.0\refint\Calc
 C:\Users\eliss\source\repos\Calculadora\Calculadora\obj\Debug\net8.0\Calculadora.pdb
 C:\Users\eliss\source\repos\Calculadora\Calculadora\obj\Debug\net8.0\Calculadora.genruntimeconfig.cache
 C:\Users\eliss\source\repos\Calculadora\Calculadora\obj\Debug\net8.0\ref\Calculadora.dll
+C:\Users\eliss\source\repos\Calculadora\Calculadora\obj\Debug\net8.0\Calculadora.sourcelink.json

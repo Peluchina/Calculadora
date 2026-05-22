@@ -13,9 +13,13 @@ namespace Calculadora.Service
             this._operacionRepository = operacionRepository;
         }
 
+        public abstract string GetMensajeNotify();
+
+        public abstract void Calcular(OperacionInsertarRequest oOp);
+
         public async Task<bool> Insertar(OperacionInsertarRequest oOp)
         {
-
+            Calcular(oOp);
             var entidad = new Operacion(oOp, GetMensajeNotify());
             return await _operacionRepository.Insertar(entidad);
         }
@@ -25,7 +29,7 @@ namespace Calculadora.Service
             return await _operacionRepository.Listar();
         }
 
-        public abstract string GetMensajeNotify();
+       
 
         public async Task<bool> InsertarOperacionCorrecta(OperacionInsertarRequest oOp)
         {
