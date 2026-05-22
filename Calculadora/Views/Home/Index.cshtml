@@ -171,6 +171,7 @@
 
                 complete: function () {
                     $("#btnCalcular").attr("disabled", false);
+                    LimpiarCampos();
                 }
             });
         }
@@ -211,10 +212,16 @@
 
                 complete: function () {
                     $("#btnCalcular").attr("disabled", false);
+                    LimpiarCampos();
                 }
             });
         }
 
+        function LimpiarCampos(){
+            document.getElementById("primerNumero").value = "";
+            document.getElementById("segundoNumero").value = "";
+            document.getElementById("cboEventoHora").value = "0";
+        }
 
 
         function calcularInversa() {
