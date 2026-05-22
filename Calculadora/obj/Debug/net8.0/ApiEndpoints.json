@@ -1,0 +1,44 @@
+[
+  {
+    "ContainingType": "Calculadora.Controllers.OperacionController",
+    "Method": "Insertar",
+    "RelativePath": "api/Operacion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "oOp",
+        "Type": "Calculadora.DTO.OperacionInsertarRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Calculadora.Controllers.OperacionController",
+    "Method": "Lista",
+    "RelativePath": "api/Operacion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Calculadora.Controllers.OperacionController",
+    "Method": "InsertarOpC",
+    "RelativePath": "api/Operacion/InsertarOpC",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "oOp",
+        "Type": "Calculadora.DTO.OperacionInsertarRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
