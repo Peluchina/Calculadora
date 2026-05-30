@@ -1,5 +1,7 @@
-using Calculadora.Repository;
-using Calculadora.Service;
+using Calculadora.Infraestructure.Repository;
+using Calculadora.Domain.Service;
+using Calculadora.Domain.Factories;
+using Calculadora.Domain.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,7 @@ builder.Services.AddScoped<IOperacionRepository>(provider =>
     return new OperacionRepository(conexion, logger);
 });
 
-builder.Services.AddScoped<OperacionServiceFactory>();
+builder.Services.AddScoped<OperacionFactory>();
 
 var app = builder.Build();
 

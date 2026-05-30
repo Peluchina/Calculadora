@@ -1,19 +1,21 @@
+﻿
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
 
+<h1>Index</h1>
 <form>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-      <label class="form-check-label" for="exampleRadios1">
-        Calculadora Inversa
-      </label>
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+            Calculadora Inversa
+        </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
-        Calculadora Normal
-      </label>
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+            Calculadora Normal
+        </label>
     </div>
     <br />
     <div class="mb-3">
@@ -76,211 +78,211 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
 
-        $(document).ready(function () {
-            iniTable();
+         $(document).ready(function () {
+             iniTable();
 
-            $("#btnCalcular").click(function (e) {
-                e.preventDefault();
+             $("#btnCalcular").click(function (e) {
+                 e.preventDefault();
 
-                let tipo = obtenerTipoCalculadora();
+                 let tipo = obtenerTipoCalculadora();
 
-                if (tipo === "option1") {
-                    calcularInversa();
-                } else {
-                    calcularNormal();
-                }
-            });
-
-
-       });
-
-        function obtenerTipoCalculadora() {
-            return $("input[name='exampleRadios']:checked").val();
-        }
+                 if (tipo === "option1") {
+                     calcularInversa();
+                 } else {
+                     calcularNormal();
+                 }
+             });
 
 
-        //Funciones
+        });
 
-        function obtenerDatos() {
-            return {
-                NumeroUno: parseInt($('#primerNumero').val()),
-                NumeroDos: parseInt($('#segundoNumero').val()),
-                IdOperador: parseInt($('#cboEventoHora').val())
-            };
-        }
-
-        function validarDatos(datos) {
-            if (isNaN(datos.NumeroUno)) 
-            {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ingresa el primer numero para realizar el calculo'
-                });
-                return false;
-            }
-            else if(isNaN(datos.NumeroDos)) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ingresa el segundo numero para realizar el calculo'
-                });
-                return false;
-            }
-            else if (isNaN(datos.IdOperador)||(datos.IdOperador==0)){
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ingresa el operador para realizar el calculo'
-                });
-                return false;
-            }
-            return true;
-
-        }
-
-        function llamarAPINormal(json) {
-
-            $("#btnCalcular").attr("disabled", true);
-
-            $.ajax({
-                type: 'POST',
-                url: `/api/Operacion/InsertarOpC`,
-                contentType: 'application/json',
-                data: JSON.stringify(json),
-
-                success: function (resultado) {
-
-                    if (resultado && resultado.resultadoCalculado !== undefined) {
-                        $('#resultado').val(resultado.resultadoCalculado);
-                    }
-
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Operación realizada correctamente'
-                    });
-
-                    if (typeof tabla !== 'undefined') {
-                        tabla.ajax.reload(null, false);
-                    }
-                },
-
-                error: function () {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error en la operación'
-                    });
-                },
-
-                complete: function () {
-                    $("#btnCalcular").attr("disabled", false);
-                    LimpiarCampos();
-                }
-            });
-        }
+         function obtenerTipoCalculadora() {
+             return $("input[name='exampleRadios']:checked").val();
+         }
 
 
-        function llamarAPIinversa(json) {
+         //Funciones
 
-            $("#btnCalcular").attr("disabled", true);
+         function obtenerDatos() {
+             return {
+                 NumeroUno: parseInt($('#primerNumero').val()),
+                 NumeroDos: parseInt($('#segundoNumero').val()),
+                 IdOperador: parseInt($('#cboEventoHora').val())
+             };
+         }
 
-            $.ajax({
-                type: 'POST',
-                url: `/api/Operacion`,
-                contentType: 'application/json',
-                data: JSON.stringify(json),
+         function validarDatos(datos) {
+             if (isNaN(datos.NumeroUno))
+             {
+                 Swal.fire({
+                     icon: 'warning',
+                     title: 'Ingresa el primer numero para realizar el calculo'
+                 });
+                 return false;
+             }
+             else if(isNaN(datos.NumeroDos)) {
+                 Swal.fire({
+                     icon: 'warning',
+                     title: 'Ingresa el segundo numero para realizar el calculo'
+                 });
+                 return false;
+             }
+             else if (isNaN(datos.IdOperador)||(datos.IdOperador==0)){
+                 Swal.fire({
+                     icon: 'warning',
+                     title: 'Ingresa el operador para realizar el calculo'
+                 });
+                 return false;
+             }
+             return true;
 
-                success: function (resultado) {
+         }
 
-                    if (resultado && resultado.resultadoCalculado !== undefined) {
-                        $('#resultado').val(resultado.resultadoCalculado);
-                    }
+         function llamarAPINormal(json) {
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Operación realizada correctamente'
-                    });
+             $("#btnCalcular").attr("disabled", true);
 
-                    if (typeof tabla !== 'undefined') {
-                        tabla.ajax.reload(null, false);
-                    }
-                },
+             $.ajax({
+                 type: 'POST',
+                 url: `/api/Operacion/InsertarOpC`,
+                 contentType: 'application/json',
+                 data: JSON.stringify(json),
 
-                error: function () {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error en la operación'
-                    });
-                },
+                 success: function (resultado) {
 
-                complete: function () {
-                    $("#btnCalcular").attr("disabled", false);
-                    LimpiarCampos();
-                }
-            });
-        }
+                     if (resultado && resultado.resultadoCalculado !== undefined) {
+                         $('#resultado').val(resultado.resultadoCalculado);
+                     }
 
-        function LimpiarCampos(){
-            document.getElementById("primerNumero").value = "";
-            document.getElementById("segundoNumero").value = "";
-            document.getElementById("cboEventoHora").value = "0";
-        }
+                     Swal.fire({
+                         icon: 'success',
+                         title: 'Operación realizada correctamente'
+                     });
 
+                     if (typeof tabla !== 'undefined') {
+                         tabla.ajax.reload(null, false);
+                     }
+                 },
 
-        function calcularInversa() {
+                 error: function () {
+                     Swal.fire({
+                         icon: 'error',
+                         title: 'Error en la operación'
+                     });
+                 },
 
-            let datos = obtenerDatos();
-
-            if (!validarDatos(datos)) return;
-            llamarAPIinversa(datos);
-        }
+                 complete: function () {
+                     $("#btnCalcular").attr("disabled", false);
+                     LimpiarCampos();
+                 }
+             });
+         }
 
 
-        function calcularNormal() {
+         function llamarAPIinversa(json) {
 
-            let datos = obtenerDatos();
+             $("#btnCalcular").attr("disabled", true);
 
-            if (!validarDatos(datos)) return;
+             $.ajax({
+                 type: 'POST',
+                 url: `/api/Operacion`,
+                 contentType: 'application/json',
+                 data: JSON.stringify(json),
 
-            llamarAPINormal(datos);
-        }
+                 success: function (resultado) {
+
+                     if (resultado && resultado.resultadoCalculado !== undefined) {
+                         $('#resultado').val(resultado.resultadoCalculado);
+                     }
+
+                     Swal.fire({
+                         icon: 'success',
+                         title: 'Operación realizada correctamente'
+                     });
+
+                     if (typeof tabla !== 'undefined') {
+                         tabla.ajax.reload(null, false);
+                     }
+                 },
+
+                 error: function () {
+                     Swal.fire({
+                         icon: 'error',
+                         title: 'Error en la operación'
+                     });
+                 },
+
+                 complete: function () {
+                     $("#btnCalcular").attr("disabled", false);
+                     LimpiarCampos();
+                 }
+             });
+         }
+
+         function LimpiarCampos(){
+             document.getElementById("primerNumero").value = "";
+             document.getElementById("segundoNumero").value = "";
+             document.getElementById("cboEventoHora").value = "0";
+         }
 
 
-        //Listado
-         var tabla;
-        function iniTable() {
-            tabla = $('#tablaRecibo').DataTable({
-                fixedColumns: {
-                    start: 1,
-                    end: 1
-                },
-                responsive: true,
-                scrollX: true,
-                scrollCollapse: true,
-                scrollY: '50vh',
-                paging: true,
-                pageLength: 10,
-                ajax: {
-                    url: `/api/Operacion`,
-                    type: 'GET',
-                    dataSrc: 'data'
+         function calcularInversa() {
 
-                },
-                columns: [
-                    {
-                        data: 'idOperacion',
-                        visible: false
-                    },
-                    { data: 'numeroUno' },
-                    { data: 'numeroDos' },
-                    { data: 'nomOperador' },
-                    { data: 'resultado' },
-                    { data: 'mensaje' }
-                ],
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json',
-                    emptyTable: 'No hay información disponible.'
-                },
-            });
-        }
-        
-       
+             let datos = obtenerDatos();
+
+             if (!validarDatos(datos)) return;
+             llamarAPIinversa(datos);
+         }
+
+
+         function calcularNormal() {
+
+             let datos = obtenerDatos();
+
+             if (!validarDatos(datos)) return;
+
+             llamarAPINormal(datos);
+         }
+
+
+         //Listado
+          var tabla;
+         function iniTable() {
+             tabla = $('#tablaRecibo').DataTable({
+                 fixedColumns: {
+                     start: 1,
+                     end: 1
+                 },
+                 responsive: true,
+                 scrollX: true,
+                 scrollCollapse: true,
+                 scrollY: '50vh',
+                 paging: true,
+                 pageLength: 10,
+                 ajax: {
+                     url: `/api/Operacion`,
+                     type: 'GET',
+                     dataSrc: 'data'
+
+                 },
+                 columns: [
+                     {
+                         data: 'idOperacion',
+                         visible: false
+                     },
+                     { data: 'numeroUno' },
+                     { data: 'numeroDos' },
+                     { data: 'nomOperador' },
+                     { data: 'resultado' },
+                     { data: 'mensaje' }
+                 ],
+                 language: {
+                     url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json',
+                     emptyTable: 'No hay información disponible.'
+                 },
+             });
+         }
+
+
     </script>
 }
